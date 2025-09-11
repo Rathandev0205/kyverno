@@ -10,5 +10,12 @@
 
 # Custom Resource Definitions (CRDs) of kyverno
 - Kyverno uses 2 CRDs of kubernetes to define the actual rules and conditions for validating, mutating, generating, or cleaning up Kubernetes resources.
-  1. ClusterPolicy: Used to define and maintain policies at **namespace** level.
-  2. Policy: Used to define and maintain policies at **cluster** level.
+  1. **ClusterPolicy**: Used to define and maintain policies at **namespace** level.
+  2. **Policy**: Used to define and maintain policies at **cluster** level.
+
+ # Kyverno Policies and Rules 
+ - kyverno acts according to the mentioned validationFailureAction in policy.
+ - There are two types of validationFailureAction
+   **1. Enforce:** If a resource violates the policy, it'll be rejected. The API server will not allow the resource to be created or updated.
+   **2. Audit:** If a resource violates the policy it is still created/updated, but Kyverno records or warns about the violation.
+- A policy in Kyverno is a set of rule(s), where each rule consists of a match declaration and anyone of these (validate, mutate, generate)
