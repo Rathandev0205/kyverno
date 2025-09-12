@@ -27,29 +27,58 @@
    **2. Audit:** If a resource violates the policy it is still created/updated, but Kyverno records or warns about the violation.
 - A policy in Kyverno is a set of rule(s), where each rule consists of a match declaration and anyone of these (validate, mutate, generate)
 
-# Sample Kyverno policy which restricts pod to run as root user
+# Sample kyverno Policies
+
+## Validation policy, which restricts pod to run as root user
 
 ```yaml
 apiVersion: kyverno.io/v1
-kind: ClusterPolicy
+kind: ClusterPolicy     # Policy
 metadata:
   name: restrict-root
 spec:
-  validationFailureAction: Enforce
+  validationFailureAction: Enforce      # Audit
   rules:
   - name: restrict-root
     match:
       any:
       - resources:
           kinds:
-          - Pod
-    validate:
+          - Pod     # Deployment
+    validate:       # mutate
       pattern:
         spec:
           containers:
           - securityContext:
               runAsNonRoot: true      #or runAsUser: "!0"
 ```
+## Mutation policy to enforce default resource limits
 
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-default-resource-limits
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: enforce-default-resource-limits
+      match:
+        resources:
+          kinds:
+            - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+              - (name): "*"
+                resources:
+                  limits:
+                    memory: "256Mi"
+                    cpu: "500m"
+                  requests:
+                    memory: "128Mi"
+                    cpu: "250m"
+```
 
 
