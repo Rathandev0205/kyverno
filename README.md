@@ -90,5 +90,7 @@ spec:
 3. Enforce Annotations
 4. Set Image Pull Policy as Always for the latest image tags etc.
 
+In kyverno mutation policy, **patchStrategicMerge** is a key used to merge the changes specified in the policy.
+
 
 
