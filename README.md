@@ -92,5 +92,31 @@ spec:
 
 In kyverno mutation policy, **patchStrategicMerge** is a key used to merge the changes specified in the policy.
 
+# Kyverno CLI
+- Kyverno CLI is used to test policies locally against Kubernetes resources without applying them to a live cluster. (similar to localstack for terraform).
+- It supports both YAML and JSON for input manifests and policies.
+- Kyverno CLI can be integrated into Continuous Integration/Continuous Deployment (CI/CD) pipelines, automating policy compliance checks as part of the deployment process.
+
+## Testing Policies with Kyverno CLI
+Here's how to validate, mutate, and generate configurations using Kyverno CLI.
+### Validate Policies
+To validate a resource against a policy, use the below command:
+
+`kyverno apply /path/to/policy.yaml --resource /path/to/resource.yaml`
+
+This command will output (refer below image) whether the resource passes the policy checks.
+
+<img width="436" height="72" alt="image" src="https://github.com/user-attachments/assets/587d1424-7469-4107-8306-990c7af46cf7" />
+
+### Mutate Policies
+The below command will output the mutated resource, allowing you to review the changes.
+
+`kyverno apply /path/to/policy.yaml --resource /path/to/resource.yaml --output-mutated`
+
+<img width="561" height="418" alt="image" src="https://github.com/user-attachments/assets/112ff183-a05a-44d2-ad30-980cb4d46a58" />
+
+
+
+
 
 
