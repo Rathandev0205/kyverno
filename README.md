@@ -80,5 +80,15 @@ spec:
                     memory: "128Mi"
                     cpu: "250m"
 ```
+# Mutation Policy
+- Mutating policies in Kubernetes are rules that automatically modify resource definitions before they are stored in etcd.
+- By automatically applying necessary changes, they speed up deployment processes and reduce the need for manual intervention.
+- Mutating policies can enforce security settings or compliance requirements automatically.
+- Some of the basic sample mutation policies are:
+1. Default Resource Limits
+2. Automatically Add Labels
+3. Enforce Annotations
+4. Set Image Pull Policy as Always for the latest image tags etc.
+
 
 
