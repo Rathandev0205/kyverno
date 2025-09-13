@@ -1,1 +1,20 @@
-- Mutating policies in Kubernetes are rules that automatically modify resource definitions before they are stored in etcd.
+#This Kyverno policy named enforce-deployment-label to add a specific label "app: critical" on all new Deployments in the production namespace. 
+
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-deployment-label
+spec:
+  rules:
+  - name: enforce-deployment-label
+    match:
+      resources:
+        kinds:
+        - Deployment
+        namespaces:
+        - production
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          labels:
+            app: "critical"
