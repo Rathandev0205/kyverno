@@ -1,0 +1,1 @@
+- Mutating policies in Kubernetes are rules that automatically modify resource definitions before they are stored in etcd.
